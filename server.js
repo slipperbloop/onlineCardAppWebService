@@ -13,7 +13,7 @@ const dbConfig = {
     port: process.env.DB_PORT,
     waitForConnections: true,
     connectionLimit: 100,
-    queueLimit: 0
+    queueLimit: 0,
 };
 
 //initialize express app
@@ -30,7 +30,7 @@ app.listen(port, () => {
 app.get('/allcards', async (req, res) => {
     try{
         let connection = await mysql.createConnection(dbConfig);
-        const [rows, fields] = await connection.execute('SELECT * FROM defaultdb.cards');
+        const [rows] = await connection.execute('SELECT * FROM defaultdb.cards');
         res.json(rows);
     } catch (err) {
         console.error(err);
